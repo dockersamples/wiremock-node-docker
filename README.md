@@ -59,12 +59,12 @@ docker run --rm -d -p 8080:8080 --name wiremock -v $PWD/wiremock:/home/wiremock 
 
 You will see the following logs in the Docker Dashboard:
 
-<img width="1459" alt="image" src="https://github.com/user-attachments/assets/aee90d0e-9ca1-46b2-995b-e176248b4ad9">
+<img width="1492" alt="image" src="https://github.com/user-attachments/assets/23488fed-d320-4eec-b160-150a2ad79c4b">
 
 
 View the container logs:
 
-<img width="754" alt="image" src="https://github.com/user-attachments/assets/fc740cc9-d78c-411e-885d-af9af854045b">
+<img width="1507" alt="image" src="https://github.com/user-attachments/assets/489173aa-23af-4685-abe0-65f7c7f8de65">
 
 
 
