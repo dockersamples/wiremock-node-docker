@@ -99,4 +99,30 @@ The frontend development server should start and be accessible at `http://localh
 <img width="306" alt="image" src="https://github.com/user-attachments/assets/5ce452ba-a100-4d12-a0be-80251205ed2a">
 
 
+## 6. Testing the Backend integration
+
+Now that WireMock is working correctly, test the integration between your backend (Node.js) and WireMock. You can do this by making a request to your backend:
+
+
+```
+curl http://localhost:5000/weather/Bangalore
+```
+
+This request should trigger your backend to make a request to WireMock and return the mocked weather data to the frontend.
+
+```
+{"city":"Mocked City","temperature":25,"humidity":60,"condition":"Clear skies"}
+```
+
+The response indicates that your entire setup is working correctly. 
+
+## 7. Testing the frontend Integration
+
+Once the backend is working as expected, ensure that the frontend (React) correctly fetches and displays the weather data.
+Visit your React application at `http://localhost:5173`, enter "Bangalore" as the city, and click "Get Weather." 
+The frontend should display the same weather data you see in the terminal.
+
+
+
+
 
