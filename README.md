@@ -54,7 +54,7 @@ cd wiremock-node-docker
 WireMock acts as the mock API that your backend will communicate with to retrieve data. It needs to be running before the backend so that when the backend makes API calls, those calls can be intercepted by WireMock
 
 ```
-docker compose up -d
+docker run --rm -d -p 8080:8080 --name wiremock -v $PWD/wiremock:/home/wiremock wiremock/wiremock
 ```
 
 You will see the following logs in the Docker Dashboard:
