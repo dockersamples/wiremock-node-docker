@@ -41,7 +41,7 @@ Notice: This sample repo is intended to support the guide mentioned above. As su
 
 ```
 git clone https://github.com/ajeetraina/wiremock-node-docker
-cd todo-preseed-postgres
+cd wiremock-node-docker
 ```
 
 ## 2. Navigate into the project
