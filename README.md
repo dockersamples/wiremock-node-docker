@@ -59,7 +59,12 @@ docker compose up -d
 
 You will see the following logs in the Docker Dashboard:
 
-<img width="1492" alt="image" src="https://github.com/user-attachments/assets/fef3e380-2420-4675-a4f7-bd95456be755">
+<img width="1459" alt="image" src="https://github.com/user-attachments/assets/aee90d0e-9ca1-46b2-995b-e176248b4ad9">
+
+
+View the container logs:
+
+<img width="754" alt="image" src="https://github.com/user-attachments/assets/fc740cc9-d78c-411e-885d-af9af854045b">
 
 
 
