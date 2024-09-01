@@ -51,6 +51,8 @@ cd wiremock-node-docker
 
 ## 3. Running Wiremock in a Docker container
 
+Mock API responses is already created for you. A directory called mapping is used to store your Wiremock mappings.
+
 WireMock acts as the mock API that your backend will communicate with to retrieve data. It needs to be running before the backend so that when the backend makes API calls, those calls can be intercepted by WireMock
 
 ```
