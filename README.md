@@ -72,6 +72,7 @@ View the container logs:
 
 ```
 cd backend
+npm install
 node app.js
 ```
 
