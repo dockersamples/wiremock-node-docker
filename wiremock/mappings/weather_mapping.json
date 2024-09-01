@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/api/weather",
+    "queryParameters": {
+      "city": {
+        "matches": ".*"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "weather_data.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
+
