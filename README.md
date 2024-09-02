@@ -187,5 +187,39 @@ curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
 {"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
 ```
 
+
+## 6. Connecting non-containers Nodejs to a containerised Wiremock 
+
+Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
+
+
+```
+git checkout node-wiremock
+```
+
+## 7. Setting up environment variable
+
+To switch between real and mocked API calls, you simply set USE_WIREMOCK=true in your environment:
+
+```
+export USE_WIREMOCK=true
+```
+
+## 8. Starting the Node application
+
+
+```
+npm run start
+```
+
+## 9. Testing the Mock API
+
+```
+curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
+
+{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
+```
+
+
 In the first step, you tested the integration between your Node.js server and the AccuWeather API, confirming that your server correctly handles requests and responses. In the second step, you used WireMock to mock the AccuWeather API, allowing you to test your server without making real API requests.
 
