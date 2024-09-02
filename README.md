@@ -42,7 +42,7 @@ Follow the below step to set up a Node.js application to fetch the weather data 
 ### 1. Clone the repository:
 
 ```
-git clone https://github.com/ajeetraina/wiremock-node-docker
+git clone https://github.com/dockersamples/wiremock-node-docker
 ```
 
 
