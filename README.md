@@ -44,8 +44,65 @@ git clone https://github.com/ajeetraina/wiremock-node-docker
 ## 2. Navigate into the project directory
 
 ```
-cd wiremock-node-docker/accuweather-api
+cd wiremock-node-docker
 ```
+
+## 3. Run Wiremock in a Docker container
+
+WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
+
+
+Navigate to the `wiremock-endpoint` directory:
+
+```
+cd wiremock-endpoint
+```
+
+Run the Wiremock service:
+
+```
+docker compose up -d
+```
+
+Verify if the WireMock container is running via Docker Dashboard.
+
+<img width="1448" alt="image" src="https://github.com/user-attachments/assets/d5fef122-cf6a-4d33-b2bc-334da30cf56d">
+
+
+Check the logs using the Docker Dashboard
+
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/15772786-071a-4082-95eb-56b9b99d448e">
+
+
+Testing the mock APIs
+
+```
+curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
+```
+
+
+The response should be:
+
+```
+{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
+```
+
+
+## 4. Setting up Node.js application to fetch the weather data from the real AccuWeather API.
+
+Navigate to the `accuweather-api` directory:
+
+```
+cd accuweather-api
+```
+
+Set the Environment Variable:
+
+```
+export USE_WIREMOCK=false
+```
+
 
 ## 3. Install dependencies
 
@@ -143,63 +200,10 @@ GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
 
 
 
-
-## 3. Running Wiremock in a Docker container
-
-WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
-
-
-## 1. Navigate to the `wiremock-endpoint` directory:
-
-```
-cd wiremock-endpoint
-```
-
-## 2. Run the Wiremock service:
-
-```
-docker compose up -d
-```
-
-Verify if the WireMock container is running via Docker Dashboard.
-
-<img width="1448" alt="image" src="https://github.com/user-attachments/assets/d5fef122-cf6a-4d33-b2bc-334da30cf56d">
-
-
-## 3. Check the logs using the Docker Dashboard
-
-
-<img width="1491" alt="image" src="https://github.com/user-attachments/assets/15772786-071a-4082-95eb-56b9b99d448e">
-
-
-## 5. Testing the mock APIs
-
-```
-curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
-```
-
-
-
-The response should be:
-
-```
-curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
-{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
-```
-
-
 ## 6. Connecting non-containerised Nodejs to a containerised Wiremock 
 
 Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
 
-
-```
-git checkout node-wiremock
-```
-
-## 7. Setting up environment variable
-
-To switch between real and mocked API calls, you simply set USE_WIREMOCK=true in your environment:
 
 ```
 export USE_WIREMOCK=true
@@ -215,9 +219,13 @@ npm run start
 ## 9. Testing the Mock API
 
 ```
-curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
+curl "http://localhost:8080/api/v1/getWeather?city=Bengaluru"
+```
 
-{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
+You will see the following result:
+
+```
+{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}%
 ```
 
 
