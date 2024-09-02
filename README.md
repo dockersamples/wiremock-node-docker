@@ -34,7 +34,7 @@ This project is divided into two main steps:
 - AccuWeather API Key - [You will need to create a free account and download it from here](https://developer.accuweather.com/user/me/apps).
 
 
-## A Real AccuWeather API Integration
+## Scenario 1: A Real AccuWeather API Integration
 
 Follow the below step to set up a Node.js application to fetch the weather data from the real AccuWeather API.
 
@@ -148,7 +148,7 @@ GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
 ```
 
 
-## Running Wiremock in a Docker container
+## Scenario 2: Running Wiremock in a Docker container
 
 
 WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
@@ -188,8 +188,9 @@ The response should be:
 
 ```
 {"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
+```
 
-## Connecting non-containerised Nodejs to a containerised Wiremock 
+## Scenario 3: Connecting non-containerised Nodejs to a containerised Wiremock 
 
 Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
 
