@@ -160,3 +160,15 @@ Verify if Wiremock container is running or not via Docker Dashboard:
 
 <img width="1491" alt="image" src="https://github.com/user-attachments/assets/15772786-071a-4082-95eb-56b9b99d448e">
 
+
+## 5. Testing the mock APIs
+
+```
+curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
+{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
+```
+
+In the initial step, you tested the integration between your Node.js server and the AccuWeather API, and it worked as expected. This means that your Node.js server is correctly making requests to the AccuWeather API and handling the responses.
+
+In the second example, you used WireMock to mock the AccuWeather API by creating a stub response in the getWeatherBengaluru.json file under the mappings directory. This allowed you to test your Node.js server without actually making requests to the AccuWeather API.
+
