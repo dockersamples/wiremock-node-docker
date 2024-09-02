@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPath": "/api/v1/getWeather",
+    "method": "GET",
+    "queryParameters" : {
+      "city" : {
+        "equalTo" : "Bengaluru"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "api/getWeatherBengaluruResponse.json"
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather API</title>
+  </head>
+  <body>
+    <h1>Weather API</h1>
+    <p>Enter a city name to get the weather data:</p>
+    <input type="text" id="cityInput" placeholder="City name">
+    <button onclick="getWeatherData()">Get Weather</button>
+    <div id="weatherData"></div>
+
+    <script>
+      async function getWeatherData() {
+        const cityInput = document.getElementById("cityInput");
+        const city = cityInput.value;
+
+        try {
+          const response = await fetch(`/api/v1/getWeather?city=${city}`);
+          const data = await response.json();
+
+          const weatherDataElement = document.getElementById("weatherData");
+          weatherDataElement.innerHTML = `
+            <h2>${data.city}</h2>
+            <p>Temperature: ${data.temperature}°C</p>
+            <p>Conditions: ${data.conditions}</p>
+            <h3>Forecasts:</h3>
+            <ul>
+              ${data.forecasts.map(forecast => `
+                <li>${forecast.date}: ${forecast.temperature}°C, ${forecast.conditions}</li>
+              `).join("")}
+            </ul>
+          `;
+        } catch (error) {
+          console.error(error);
+          const weatherDataElement = document.getElementById("weatherData");
+          weatherDataElement.innerHTML = "Error fetching weather data.";
+        }
+      }
+    </script>
+  </body>
+</html>
