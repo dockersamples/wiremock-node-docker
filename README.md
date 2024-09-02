@@ -20,7 +20,6 @@ This project is divided into two main steps:
 ## Tech Stack
 
 
-
 - Node.js: A JavaScript runtime environment for building server-side applications.
 - Express: A popular web application framework for Node.js.
 - Axios: A promise-based HTTP client for making requests to external APIs.
@@ -28,11 +27,16 @@ This project is divided into two main steps:
 - WireMock: A tool for stubbing and mocking HTTP requests during testing.
 
 
-## Development
+## Prerequisite
 
 - Docker Desktop
 - Node (LTS version)
+- AccuWeather API Key - [You will need to create a free account and download it from here](https://developer.accuweather.com/user/me/apps).
 
+
+## A Real AccuWeather API Integration
+
+Follow the below step to set up a Node.js application to fetch the weather data from the real AccuWeather API.
 
 
 ## 1. Clone the repository:
@@ -41,73 +45,19 @@ This project is divided into two main steps:
 git clone https://github.com/ajeetraina/wiremock-node-docker
 ```
 
-## 2. Navigate into the project directory
 
-```
-cd wiremock-node-docker
-```
-
-## 3. Run Wiremock in a Docker container
-
-WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
-
-
-Navigate to the `wiremock-endpoint` directory:
-
-```
-cd wiremock-endpoint
-```
-
-Run the Wiremock service:
-
-```
-docker compose up -d
-```
-
-Verify if the WireMock container is running via Docker Dashboard.
-
-<img width="1448" alt="image" src="https://github.com/user-attachments/assets/d5fef122-cf6a-4d33-b2bc-334da30cf56d">
-
-
-Check the logs using the Docker Dashboard
-
-
-<img width="1491" alt="image" src="https://github.com/user-attachments/assets/15772786-071a-4082-95eb-56b9b99d448e">
-
-
-Testing the mock APIs
-
-```
-curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
-```
-
-
-The response should be:
-
-```
-{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
-```
-
-
-## 4. Setting up Node.js application to fetch the weather data from the real AccuWeather API.
-
-Navigate to the `accuweather-api` directory:
+## 2. Navigate to the `accuweather-api` directory:
 
 ```
 cd accuweather-api
 ```
 
-Set the Environment Variable:
+## 3. Set the Environment Variable:
+
+To use AccuWeather API, set the following envrionment variable:
 
 ```
 export USE_WIREMOCK=false
-```
-
-
-## 3. Install dependencies
-
-```
-npm install
 ```
 
 ## 4. Create a `.env` file
@@ -121,14 +71,13 @@ ACCUWEATHER_API_KEY=2gzXXXXXXXBWnZU
 ## 5. Run the project
 
 ```
+npm install
 npm run start
 ```
 
 You should see the following output:
 
-
 ```
-
 > express-api-starter@1.2.0 start
 > node src/index.js
 
@@ -199,17 +148,60 @@ GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
 ```
 
 
+## Running Wiremock in a Docker container
 
-## 6. Connecting non-containerised Nodejs to a containerised Wiremock 
+
+WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
+
+
+### 1. Navigate to the `wiremock-endpoint` directory:
+
+```
+cd wiremock-endpoint
+```
+
+### 2. Run the Wiremock service:
+
+```
+docker compose up -d
+```
+
+Verify if the WireMock container is running via Docker Dashboard.
+
+<img width="1448" alt="image" src="https://github.com/user-attachments/assets/d5fef122-cf6a-4d33-b2bc-334da30cf56d">
+
+
+### 3. Check the logs using the Docker Dashboard
+
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/15772786-071a-4082-95eb-56b9b99d448e">
+
+
+### 4. Testing the mock APIs
+
+```
+curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
+```
+
+
+The response should be:
+
+```
+{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
+
+## Connecting non-containerised Nodejs to a containerised Wiremock 
 
 Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
+
+
+### 1. Navigate back to `accuweather-api` directory and run the following command to switch to Wiremock.
 
 
 ```
 export USE_WIREMOCK=true
 ```
 
-## 8. Starting the Node application
+## 2. Start the Node application
 
 
 ```
@@ -229,5 +221,5 @@ You will see the following result:
 ```
 
 
-In the first step, you tested the integration between your Node.js server and the AccuWeather API, confirming that your server correctly handles requests and responses. In the second step, you used WireMock to mock the AccuWeather API, allowing you to test your server without making real API requests.
+
 
