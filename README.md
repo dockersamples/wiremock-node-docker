@@ -136,79 +136,27 @@ GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
 ## 3. Running Wiremock in a Docker container
 
 Mock API responses is already created for you. A directory called mapping is used to store your Wiremock mappings.
-
 WireMock acts as the mock API that your backend will communicate with to retrieve data. It needs to be running before the backend so that when the backend makes API calls, those calls can be intercepted by WireMock
 
-```
-docker run --rm -d -p 8080:8080 --name wiremock -v $PWD/wiremock:/home/wiremock wiremock/wiremock
-```
-
-You will see the following logs in the Docker Dashboard:
-
-<img width="1492" alt="image" src="https://github.com/user-attachments/assets/23488fed-d320-4eec-b160-150a2ad79c4b">
-
-
-View the container logs:
-
-<img width="1507" alt="image" src="https://github.com/user-attachments/assets/489173aa-23af-4685-abe0-65f7c7f8de65">
-
-
-
-## 4. Start the backend
+## 1. Navigate to wiremock-endpoint directory:
 
 ```
-cd backend
-npm install
-node app.js
+cd wiremock-endpoint
 ```
 
-The backend server should start and listen on `http://localhost:5000`
-
-## 5. Start the frontend
+## 2. Run the Wiremock service:
 
 ```
-cd frontend
-npm run dev
+docker compose up -d
 ```
 
-The frontend development server should start and be accessible at `http://localhost:5173`.
+Verify if Wiremock container is running or not via Docker Dashboard:
 
-```
- VITE v5.4.2  ready in 152 ms
-
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
-  ➜  press h + enter to show help
-
-```
-
-<img width="306" alt="image" src="https://github.com/user-attachments/assets/5ce452ba-a100-4d12-a0be-80251205ed2a">
+<img width="1448" alt="image" src="https://github.com/user-attachments/assets/d5fef122-cf6a-4d33-b2bc-334da30cf56d">
 
 
-## 6. Testing the Backend integration
-
-Now that WireMock is working correctly, test the integration between your backend (Node.js) and WireMock. You can do this by making a request to your backend:
+## 3. Check the logs using Docker Dashboard
 
 
-```
-curl http://localhost:5000/weather/Bangalore
-```
-
-This request should trigger your backend to make a request to WireMock and return the mocked weather data to the frontend.
-
-```
-{"city":"Mocked City","temperature":25,"humidity":60,"condition":"Clear skies"}
-```
-
-The response indicates that your entire setup is working correctly. 
-
-## 7. Testing the frontend Integration
-
-Once the backend is working as expected, ensure that the frontend (React) correctly fetches and displays the weather data.
-Visit your React application at `http://localhost:5173`, enter "Bangalore" as the city, and click "Get Weather." 
-The frontend should display the same weather data you see in the terminal.
-
-
-
-
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/15772786-071a-4082-95eb-56b9b99d448e">
 
