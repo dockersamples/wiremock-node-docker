@@ -1,11 +1,21 @@
 # Mocking API services in development and testing with Wiremock
 
-This repo contains the sample application for [Mocking API services in development and testing with Wiremock](https://github.com/dockersamples/wiremock-node-docker) guide on Docker Docs. This project first demonstrates how to integrate the AccuWeather API with a Node.js server to fetch and display weather data for a given city. To simulate the weather API, you'll use WireMock, enabling us to mock API responses during development and testing.
-
-In the initial step, you'll test the integration between your Node.js server and the AccuWeather API just to ensure that your Node.js server is correctly making requests to the AccuWeather API and handling the responses. In the second example, you will use WireMock to mock the AccuWeather API by creating a stub response. This will allow you to test your Node.js server without actually making requests to the AccuWeather API.
+This repo contains the sample application for [Mocking API services in development and testing with Wiremock](https://github.com/dockersamples/wiremock-node-docker) guide on Docker Docs. This project first demonstrates how to integrate the AccuWeather API with a Node.js server to fetch and display weather data for a given city. To simulate the weather API, you'll use WireMock that enables you to mock API responses during development and testing.
 
 
-Notice: This sample repo is intended to support the guide mentioned above. As such, the application code is purposely kept simple to keep the focus on the guide's content and should not be considered production-ready.
+## Project Overview
+
+This project is divided into two main steps:
+
+**1. AccuWeather API Integration:**
+- Test the integration between your Node.js server and the AccuWeather API to ensure that your server correctly makes requests to the AccuWeather API and handles the responses.
+
+**2. Mocking with WireMock:**
+- Use WireMock to mock the AccuWeather API by creating a stub response. This allows you to test your Node.js server without making actual requests to the AccuWeather API.
+
+
+
+**Notice:** This sample repo is intended to support the guide mentioned above. As such, the application code is purposely kept simple to keep the focus on the guide's content and should not be considered production-ready.
 
 ## Tech Stack
 
