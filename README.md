@@ -39,20 +39,20 @@ This project is divided into two main steps:
 Follow the below step to set up a Node.js application to fetch the weather data from the real AccuWeather API.
 
 
-## 1. Clone the repository:
+### 1. Clone the repository:
 
 ```
 git clone https://github.com/ajeetraina/wiremock-node-docker
 ```
 
 
-## 2. Navigate to the `accuweather-api` directory:
+### 2. Navigate to the `accuweather-api` directory:
 
 ```
 cd accuweather-api
 ```
 
-## 3. Set the Environment Variable:
+### 3. Set the Environment Variable:
 
 To use AccuWeather API, set the following envrionment variable:
 
@@ -60,7 +60,7 @@ To use AccuWeather API, set the following envrionment variable:
 export USE_WIREMOCK=false
 ```
 
-## 4. Create a `.env` file
+### 4. Create a `.env` file
 
 Create a `.env` file in the root directory of the project and add your AccuWeather API key:
 
@@ -68,7 +68,7 @@ Create a `.env` file in the root directory of the project and add your AccuWeath
 ACCUWEATHER_API_KEY=2gzXXXXXXXBWnZU
 ```
 
-## 5. Run the project
+### 5. Run the project
 
 ```
 npm install
@@ -87,7 +87,7 @@ Stub created successfully!
 
 Keep this terminal window open.
 
-## 6. Testing the application
+### 6. Testing the application
 
 Open a new terminal and run the following `curl` command to test the application:
 
@@ -202,14 +202,14 @@ Based on your getWeather.js file, here's how you can adjust your Node.js server 
 export USE_WIREMOCK=true
 ```
 
-## 2. Start the Node application
+### 2. Start the Node application
 
 
 ```
 npm run start
 ```
 
-## 9. Testing the Mock API
+### 3. Testing the Mock API
 
 ```
 curl "http://localhost:8080/api/v1/getWeather?city=Bengaluru"
