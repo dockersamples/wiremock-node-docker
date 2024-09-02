@@ -1,6 +1,7 @@
 # Mocking API services in development and testing with Wiremock
 
-This repo contains the sample application for [Mocking API services in development and testing with Wiremock](https://github.com/dockersamples/wiremock-node-docker) guide on Docker Docs. In this guide, you'll build a simple weather dashboard application using React for the frontend and Node.js for the backend. The app will fetch weather data based on user input, allowing users to see current weather conditions for various cities. To simulate the weather API, you'll use WireMock, enabling us to mock API responses during development and testing.
+This repo contains the sample application for [Mocking API services in development and testing with Wiremock](https://github.com/dockersamples/wiremock-node-docker) guide on Docker Docs. This project first demonstrates how to integrate the AccuWeather API with a Node.js server to fetch and display weather data for a given city. To simulate the weather API, you'll use WireMock, enabling us to mock API responses during development and testing.
+
 
 Notice: This sample repo is intended to support the guide mentioned above. As such, the application code is purposely kept simple to keep the focus on the guide's content and should not be considered production-ready.
 
@@ -8,25 +9,11 @@ Notice: This sample repo is intended to support the guide mentioned above. As su
 
 
 
-
-### Frontend: 
-- **React**: A powerful JavaScript library for building user interfaces, particularly single-page applications (SPAs).
-- **Vite**: A modern build tool that provides a fast development environment, leveraging native ES modules for better performance during development.
-
-### Backend: 
-- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine, used for building scalable server-side applications.
-- **Express**: A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-
-### Testing: 
-- **WireMock**: A tool for mocking HTTP services, allowing you to simulate API responses and test your application without relying on real external APIs.
-
-
-
-## Project Structure
-
-- **/backend**: Contains your Node.js backend code, including routes, controllers, and any other server-side logic. This is where your API endpoints are defined, and where the backend interacts with WireMock to fetch mocked data.
-- **/frontend**: Contains your React frontend code, including components, styling, and any assets. This is the user interface where users can input data, such as the city name, to retrieve weather information.
-- **/wiremock**: Contains your WireMock setup, including mappings and response files. This directory is used to define the mocked API responses that the backend interacts with during development and testing.
+- Node.js: A JavaScript runtime environment for building server-side applications.
+- Express: A popular web application framework for Node.js.
+- Axios: A promise-based HTTP client for making requests to external APIs.
+- Dotenv: A zero-dependency module that loads environment variables from a `.env` file.
+- WireMock: A tool for stubbing and mocking HTTP requests during testing.
 
 
 ## Development
@@ -43,11 +30,108 @@ Notice: This sample repo is intended to support the guide mentioned above. As su
 git clone https://github.com/ajeetraina/wiremock-node-docker
 ```
 
-## 2. Navigate into the project
+## 2. Navigate into the project directory
 
 ```
-cd wiremock-node-docker
+cd wiremock-node-docker/accuweather-api
 ```
+
+## 3. Install dependencies
+
+```
+npm install
+```
+
+## 4. Create .env file
+
+Create a `.env` file in the root directory of the project and add your AccuWeather API key:
+
+```
+ACCUWEATHER_API_KEY=2gzXXXXXXXBWnZU
+```
+
+## 5. Run the project
+
+```
+npm run start
+```
+
+
+
+```
+
+> express-api-starter@1.2.0 start
+> node src/index.js
+
+Listening: http://localhost:5000
+Stub created successfully!
+```
+
+Keep this terminal window open.
+
+## 6. Testing the application
+
+Open a new terminal and test it with curl command:
+
+```
+curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
+```
+
+It should show the following result:
+
+```
+{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
+```
+
+Switch to the other terminal where you run `npm run start` and you will see the following response:
+
+
+```
+Location Response: [
+  {
+    Version: 1,
+    Key: '204108',
+    Type: 'City',
+    Rank: 11,
+    LocalizedName: 'Bengaluru',
+    EnglishName: 'Bengaluru',
+    PrimaryPostalCode: '',
+    Region: { ID: 'ASI', LocalizedName: 'Asia', EnglishName: 'Asia' },
+    Country: { ID: 'IN', LocalizedName: 'India', EnglishName: 'India' },
+    AdministrativeArea: {
+      ID: 'KA',
+      LocalizedName: 'Karnataka',
+      EnglishName: 'Karnataka',
+      Level: 1,
+      LocalizedType: 'State',
+      EnglishType: 'State',
+      CountryID: 'IN'
+    },
+    TimeZone: {
+      Code: 'IST',
+      Name: 'Asia/Kolkata',
+      GmtOffset: 5.5,
+      IsDaylightSaving: false,
+      NextOffsetChange: null
+    },
+    GeoPosition: { Latitude: 12.991, Longitude: 77.579, Elevation: [Object] },
+    IsAlias: false,
+    SupplementalAdminAreas: [ [Object] ],
+    DataSets: [
+      'AirQualityCurrentConditions',
+      'AirQualityForecasts',
+      'Alerts',
+      'FutureRadar',
+      'MinuteCast',
+      'PremiumAirQuality'
+    ]
+  }
+]
+GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
+```
+
+
+
 
 ## 3. Running Wiremock in a Docker container
 
