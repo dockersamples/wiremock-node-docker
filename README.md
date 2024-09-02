@@ -212,7 +212,7 @@ npm run start
 ### 3. Testing the Mock API
 
 ```
-curl "http://localhost:8080/api/v1/getWeather?city=Bengaluru"
+curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
 ```
 
 You will see the following result:
