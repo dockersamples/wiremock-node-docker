@@ -188,7 +188,7 @@ curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
 ```
 
 
-## 6. Connecting non-containers Nodejs to a containerised Wiremock 
+## 6. Connecting non-containerised Nodejs to a containerised Wiremock 
 
 Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
 
