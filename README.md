@@ -22,7 +22,6 @@ Notice: This sample repo is intended to support the guide mentioned above. As su
 
 - Docker Desktop
 - Node (LTS version)
-- A basic knowledge of React
 
 
 
