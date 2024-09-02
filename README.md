@@ -60,9 +60,9 @@ To use AccuWeather API, set the following envrionment variable:
 export USE_WIREMOCK=false
 ```
 
-### 4. Create a `.env` file
+### 4. Add your AccuWeather API key
 
-Create a `.env` file in the root directory of the project and add your AccuWeather API key:
+Modify `.env` file in the root directory of the accuweather-api directory and add your AccuWeather API key:
 
 ```
 ACCUWEATHER_API_KEY=2gzXXXXXXXBWnZU
@@ -146,6 +146,8 @@ Location Response: [
 ]
 GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
 ```
+
+Before you move to the next step, stop the Backend API server by selecting Ctrl+D.
 
 
 ## Scenario 2: Running Wiremock in a Docker container
