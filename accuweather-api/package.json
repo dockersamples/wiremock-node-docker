@@ -9,14 +9,13 @@
     "lint": "eslint --fix src",
     "test": "mocha --exit"
   },
-  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/w3cj/express-api-starter.git"
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.5",
+    "axios": "^1.7.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
