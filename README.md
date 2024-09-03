@@ -34,9 +34,9 @@ This project is divided into two main steps:
 - AccuWeather API Key - [You will need to create a free account and download it from here](https://developer.accuweather.com/user/me/apps).
 
 
-## Scenario 1: A Real AccuWeather API Integration
+## Scenario 1: An External AccuWeather API Integration
 
-Follow the below step to set up a Node.js application to fetch the weather data from the real AccuWeather API.
+Follow the below step to set up a Node.js application to fetch the weather data from the external AccuWeather API.
 
 
 ### 1. Clone the repository:
