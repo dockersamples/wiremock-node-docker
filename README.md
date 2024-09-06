@@ -150,7 +150,7 @@ GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
 Before you move to the next step, stop the Backend API server by selecting Ctrl+D.
 
 
-## Scenario 2: Running Wiremock in a Docker container
+## Scenario 2: Running WireMock in a Docker container
 
 
 WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
@@ -162,7 +162,7 @@ WireMock acts as the mock API that your backend will communicate with to retriev
 cd wiremock-endpoint
 ```
 
-### 2. Run the Wiremock service:
+### 2. Run the WireMock service:
 
 ```
 docker compose up -d
@@ -192,12 +192,12 @@ The response should be:
 {"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
 ```
 
-## Scenario 3: Connecting non-containerised Nodejs to a containerised Wiremock 
+## Scenario 3: Connecting non-containerised Nodejs to a containerised WireMock 
 
 Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
 
 
-### 1. Navigate back to `accuweather-api` directory and run the following command to switch to Wiremock.
+### 1. Navigate back to `accuweather-api` directory and run the following command to switch to WireMock.
 
 
 ```
