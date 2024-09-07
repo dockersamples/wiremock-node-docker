@@ -99,7 +99,7 @@ The response should look like this:
 
 
 
-Before you move to the next step, stop the Backend API server by selecting Ctrl+D.
+Before you move to the next step, switch to the old terminal where the Backend API server was running and press Ctrl+D to stop the server.
 
 
 ## Scenario 2: Running WireMock in a Docker container
