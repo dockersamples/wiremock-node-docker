@@ -76,8 +76,9 @@ You should see the following output:
 > express-api-starter@1.2.0 start
 > node src/index.js
 
+API_ENDPOINT_BASE: http://dataservice.accuweather.com
+ACCUWEATHER_API_KEY: GLC6sUXXXXXXZyzJDmyJ
 Listening: http://localhost:5000
-Stub created successfully!
 ```
 
 Keep this terminal window open.
