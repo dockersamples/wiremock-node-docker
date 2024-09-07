@@ -3,52 +3,94 @@ require("dotenv").config();
 const axios = require("axios");
 
 const router = express.Router();
-const ACCUWEATHER_API_KEY = process.env.ACCUWEATHER_API_KEY;
-const USE_WIREMOCK = process.env.USE_WIREMOCK === 'true';
+const API_ENDPOINT_BASE = process.env.API_ENDPOINT_BASE;
+const API_KEY = process.env.ACCUWEATHER_API_KEY;
+
+if (!API_ENDPOINT_BASE) {
+  throw new Error("API_ENDPOINT_BASE is not defined in environment variables");
+}
+
+if (!API_KEY) {
+  throw new Error("ACCUWEATHER_API_KEY is not defined in environment variables");
+}
+
+// Function to fetch the location key for the city
+async function fetchLocationKey(townName) {
+  const { data: locationData } = await axios.get(`${API_ENDPOINT_BASE}/locations/v1/cities/search`, {
+    params: { q: townName, details: false, apikey: API_KEY },
+  });
+  return locationData[0]?.Key;
+}
+
+// Function to fetch current conditions
+async function fetchCurrentConditions(locationKey) {
+  const { data: currentConditionsData } = await axios.get(`${API_ENDPOINT_BASE}/currentconditions/v1/${locationKey}`, {
+    params: { apikey: API_KEY },
+  });
+  return currentConditionsData[0];
+}
+
+// Function to fetch 5-day forecast
+async function fetchForecasts(locationKey) {
+  const { data: forecastsData } = await axios.get(`${API_ENDPOINT_BASE}/forecasts/v1/daily/5day/${locationKey}`, {
+    params: { apikey: API_KEY },
+  });
+  return forecastsData.DailyForecasts;
+}
 
 router.get("/", async (req, res) => {
   const townName = req.query.city;
-  let weatherData;
+
+  if (!townName) {
+    return res.status(400).send("City query parameter is required");
+  }
 
   try {
-    if (USE_WIREMOCK) {
-      // Fetch data from WireMock running on port 8080
-      const response = await axios.get(`http://localhost:8080/api/v1/getWeather?city=${townName}`);
-      weatherData = response.data;
-    } else {
-      // Fetch data from the real AccuWeather API
-      const locationResponse = await axios.get(
-        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${ACCUWEATHER_API_KEY}&q=${townName}&details=false`
-      );
-      const locationKey = locationResponse.data[0].Key;
-
-      const currentConditionsResponse = await axios.get(
-        `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}.json?apikey=${ACCUWEATHER_API_KEY}`
-      );
-      const currentConditions = currentConditionsResponse.data[0];
-
-      const forecastsResponse = await axios.get(
-        `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${ACCUWEATHER_API_KEY}`
-      );
-      const forecasts = forecastsResponse.data.DailyForecasts;
-
-      // Format the weather data
-      weatherData = {
-        city: townName,
-        temperature: currentConditions.Temperature.Metric.Value,
-        conditions: currentConditions.WeatherText,
-        forecasts: forecasts.map((forecast) => ({
-          date: forecast.Date,
-          temperature: forecast.Temperature.Maximum.Value,
-          conditions: forecast.Day.IconPhrase,
-        })),
-      };
+    // If using WireMock, call the mock endpoint directly
+    if (API_ENDPOINT_BASE.includes('localhost')) {
+      const { data } = await axios.get(`${API_ENDPOINT_BASE}/api/v1/getWeather`, {
+        params: { city: townName },
+      });
+      return res.send(data);
     }
+
+    // Fetch location key for the city
+    const locationKey = await fetchLocationKey(townName);
+
+    if (!locationKey) {
+      return res.status(404).send(`City "${townName}" not found`);
+    }
+
+    // Fetch current conditions and 5-day forecast
+    const [currentConditions, forecasts] = await Promise.all([
+      fetchCurrentConditions(locationKey),
+      fetchForecasts(locationKey),
+    ]);
+
+    // Format the weather data
+    const weatherData = {
+      city: townName,
+      temperature: currentConditions?.Temperature?.Metric?.Value || 'N/A',
+      conditions: currentConditions?.WeatherText || 'N/A',
+      forecasts: forecasts ? forecasts.map(forecast => ({
+        date: forecast.Date,
+        temperature: forecast.Temperature.Maximum.Value,
+        conditions: forecast.Day.IconPhrase,
+      })) : [],
+    };
 
     res.send(weatherData);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error fetching weather data");
+    if (error.response) {
+      console.error('API responded with an error:', error.response.status, error.response.data);
+      return res.status(error.response.status).send(`Error fetching weather data: ${error.response.data.Message || 'Unknown error'}`);
+    } else if (error.request) {
+      console.error('No response received from API:', error.request);
+      return res.status(503).send("No response received from weather service");
+    } else {
+      console.error('Error setting up the request:', error.message);
+      return res.status(500).send("Error fetching weather data");
+    }
   }
 });
 
