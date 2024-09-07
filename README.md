@@ -144,12 +144,27 @@ The response should be:
 
 
 
-### 1. Navigate back to `accuweather-api` directory and modify the .env
+### 1. Navigate back to `accuweather-api` directory 
+
+
+```
+cd accuweather-api
+```
+
+### 2. Unset the environment variables
+
+Just a housekeeping stuff to ensure that your environment variable is not storing the old values
+
+```
+unset API_ENDPOINT_BASE
+unset unset ACCUWEATHER_API_KEY
+```
+
+### 3. set the new api endpoint to point to WireMock.
 
 ```
 API_ENDPOINT_BASE=http://localhost:8080
 ```
-
 
 
 ### 2. Start the Node application
@@ -168,7 +183,7 @@ curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
 You will see the following result:
 
 ```
-{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}%
+{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
 ```
 
 
