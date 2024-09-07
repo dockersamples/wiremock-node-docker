@@ -52,23 +52,18 @@ git clone https://github.com/dockersamples/wiremock-node-docker
 cd accuweather-api
 ```
 
-### 3. Set the Environment Variable:
 
-To use AccuWeather API, set the following envrionment variable:
+### 3. Add your AccuWeather API key
 
-```
-export USE_WIREMOCK=false
-```
-
-### 4. Add your AccuWeather API key
-
-Modify `.env` file in the root directory of the accuweather-api directory and add your AccuWeather API key:
+Modify `.env` file in the root directory of the accuweather-api/ directory and add your AccuWeather API key.
+Keep API_ENDPOINT_BASE variable unmodified.
 
 ```
-ACCUWEATHER_API_KEY=2gzXXXXXXXBWnZU
+ACCUWEATHER_API_KEY=XXXXXX
+API_ENDPOINT_BASE=http://dataservice.accuweather.com
 ```
 
-### 5. Run the project
+### 5. Run the Backend API server
 
 ```
 npm install
@@ -98,54 +93,10 @@ curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
 The response should look like this:
 
 ```
-{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
+{"city":"Bengaluru","temperature":22.8,"conditions":"Cloudy","forecasts":[{"date":"2024-09-07T07:00:00+05:30","temperature":83,"conditions":"Showers"},{"date":"2024-09-08T07:00:00+05:30","temperature":81,"conditions":"Thunderstorms"},{"date":"2024-09-09T07:00:00+05:30","temperature":82,"conditions":"Cloudy"},{"date":"2024-09-10T07:00:00+05:30","temperature":84,"conditions":"Cloudy"},{"date":"2024-09-11T07:00:00+05:30","temperature":82,"conditions":"Showers"}]}%
 ```
 
-Switch back to the terminal where you ran npm run start and you will see the following output:
 
-```
-Location Response: [
-  {
-    Version: 1,
-    Key: '204108',
-    Type: 'City',
-    Rank: 11,
-    LocalizedName: 'Bengaluru',
-    EnglishName: 'Bengaluru',
-    PrimaryPostalCode: '',
-    Region: { ID: 'ASI', LocalizedName: 'Asia', EnglishName: 'Asia' },
-    Country: { ID: 'IN', LocalizedName: 'India', EnglishName: 'India' },
-    AdministrativeArea: {
-      ID: 'KA',
-      LocalizedName: 'Karnataka',
-      EnglishName: 'Karnataka',
-      Level: 1,
-      LocalizedType: 'State',
-      EnglishType: 'State',
-      CountryID: 'IN'
-    },
-    TimeZone: {
-      Code: 'IST',
-      Name: 'Asia/Kolkata',
-      GmtOffset: 5.5,
-      IsDaylightSaving: false,
-      NextOffsetChange: null
-    },
-    GeoPosition: { Latitude: 12.991, Longitude: 77.579, Elevation: [Object] },
-    IsAlias: false,
-    SupplementalAdminAreas: [ [Object] ],
-    DataSets: [
-      'AirQualityCurrentConditions',
-      'AirQualityForecasts',
-      'Alerts',
-      'FutureRadar',
-      'MinuteCast',
-      'PremiumAirQuality'
-    ]
-  }
-]
-GET /api/v1/getWeather?city=Bengaluru 200 1690.639 ms - 500
-```
 
 Before you move to the next step, stop the Backend API server by selecting Ctrl+D.
 
@@ -156,13 +107,11 @@ Before you move to the next step, stop the Backend API server by selecting Ctrl+
 WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
 
 
-### 1. Navigate to the `wiremock-endpoint` directory:
-
-```
-cd wiremock-endpoint
 ```
 
-### 2. Run the WireMock service:
+### 1. Run the WireMock service:
+
+Navigate to the root of the project directory and run the following command:
 
 ```
 docker compose up -d
@@ -194,15 +143,15 @@ The response should be:
 
 ## Scenario 3: Connecting non-containerised Nodejs to a containerised WireMock 
 
-Based on your getWeather.js file, here's how you can adjust your Node.js server to toggle between fetching data from the real AccuWeather API and using the mocked responses provided by WireMock.
 
 
-### 1. Navigate back to `accuweather-api` directory and run the following command to switch to WireMock.
-
+### 1. Navigate back to `accuweather-api` directory and modify the .env
 
 ```
-export USE_WIREMOCK=true
+API_ENDPOINT_BASE=http://localhost:8080
 ```
+
+
 
 ### 2. Start the Node application
 
