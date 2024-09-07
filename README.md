@@ -107,7 +107,6 @@ Before you move to the next step, stop the Backend API server by selecting Ctrl+
 WireMock acts as the mock API that your backend will communicate with to retrieve data. The mock API responses have already been created for you in the mappings directory.
 
 
-```
 
 ### 1. Run the WireMock service:
 
