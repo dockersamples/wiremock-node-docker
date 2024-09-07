@@ -1,19 +1,23 @@
-const express = require("express");
 require("dotenv").config();
+
+const express = require("express");
 const axios = require("axios");
 
 const router = express.Router();
 const API_ENDPOINT_BASE = process.env.API_ENDPOINT_BASE;
 const API_KEY = process.env.ACCUWEATHER_API_KEY;
 
+console.log('API_ENDPOINT_BASE:', API_ENDPOINT_BASE);  // Log after it's defined
+console.log('ACCUWEATHER_API_KEY:', API_KEY);          // Log after it's defined
+
 if (!API_ENDPOINT_BASE) {
   throw new Error("API_ENDPOINT_BASE is not defined in environment variables");
 }
 
-if (!API_KEY) {
+// Only check for API key if not using WireMock
+if (API_ENDPOINT_BASE !== 'http://localhost:8080' && !API_KEY) {
   throw new Error("ACCUWEATHER_API_KEY is not defined in environment variables");
 }
-
 // Function to fetch the location key for the city
 async function fetchLocationKey(townName) {
   const { data: locationData } = await axios.get(`${API_ENDPOINT_BASE}/locations/v1/cities/search`, {
@@ -95,4 +99,3 @@ router.get("/", async (req, res) => {
 });
 
 module.exports = router;
-
