@@ -161,7 +161,9 @@ unset API_ENDPOINT_BASE
 unset ACCUWEATHER_API_KEY
 ```
 
-### 3. set the new api endpoint to point to WireMock.
+### 3. Set the new environment variable
+
+Remove the old entry in `.env` file and replace it with the following:
 
 ```
 API_ENDPOINT_BASE=http://localhost:8080
@@ -173,6 +175,17 @@ API_ENDPOINT_BASE=http://localhost:8080
 
 ```
 npm run start
+```
+
+You should see the following output:
+
+```
+> express-api-starter@1.2.0 start
+> node src/index.js
+
+API_ENDPOINT_BASE: http://localhost:8080
+ACCUWEATHER_API_KEY: undefined
+Listening: http://localhost:5000
 ```
 
 ### 3. Testing the Mock API
