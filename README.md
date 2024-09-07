@@ -138,7 +138,7 @@ curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
 The response should be:
 
 ```
-{"city":"Bengaluru","temperature":25,"conditions":"Clear Sky"}
+{"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}%
 ```
 
 ## Scenario 3: Connecting non-containerised Nodejs to a containerised WireMock 
