@@ -158,7 +158,7 @@ Just a housekeeping stuff to ensure that your environment variable is not storin
 
 ```
 unset API_ENDPOINT_BASE
-unset unset ACCUWEATHER_API_KEY
+unset ACCUWEATHER_API_KEY
 ```
 
 ### 3. set the new api endpoint to point to WireMock.
