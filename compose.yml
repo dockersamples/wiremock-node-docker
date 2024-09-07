@@ -1,8 +1,0 @@
-services:
-  wiremock:
-    image: wiremock/wiremock
-    volumes:
-      - ./wiremock-endpoint/__files:/home/wiremock/__files
-      - ./wiremock-endpoint/mappings:/home/wiremock/mappings
-    ports:
-      - 8080:8080
