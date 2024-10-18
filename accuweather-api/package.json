@@ -3,11 +3,11 @@
   "version": "1.2.0",
   "description": " A basic start for an express.js API",
   "main": "index.js",
-
   "scripts": {
     "start": "NODE_ENV=production node src/index.js",
     "dev": "NODE_ENV=development node src/index.js",
     "nodemon": "nodemon --exec npm run dev",
+    "build": "rimraf dist && babel src -d dist",
     "prettier": "prettier --write src",
     "lint:fix": "eslint --fix src",
     "lint": "eslint --fix src",
@@ -33,6 +33,9 @@
     "superagent": "^10.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.25.7",
+    "@babel/core": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
     "eslint": "^7.28.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.23.4",
