@@ -3,9 +3,13 @@
   "version": "1.2.0",
   "description": " A basic start for an express.js API",
   "main": "index.js",
+
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "NODE_ENV=production node src/index.js",
+    "dev": "NODE_ENV=development node src/index.js",
+    "nodemon": "nodemon --exec npm run dev",
+    "prettier": "prettier --write src",
+    "lint:fix": "eslint --fix src",
     "lint": "eslint --fix src",
     "test": "mocha --exit"
   },
