@@ -78,7 +78,7 @@ You should see the following output:
 
 API_ENDPOINT_BASE: http://dataservice.accuweather.com
 ACCUWEATHER_API_KEY: GLC6sUXXXXXXZyzJDmyJ
-Listening: http://localhost:5000
+Listening: http://localhost:5001
 ```
 
 Keep this terminal window open.
@@ -88,7 +88,7 @@ Keep this terminal window open.
 Open a new terminal and run the following `curl` command to test the application:
 
 ```
-curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
+curl "http://localhost:5001/api/v1/getWeather?city=Bengaluru"
 ```
 
 The response should look like this:
@@ -185,13 +185,13 @@ You should see the following output:
 
 API_ENDPOINT_BASE: http://localhost:8080
 ACCUWEATHER_API_KEY: undefined
-Listening: http://localhost:5000
+Listening: http://localhost:5001
 ```
 
 ### 3. Testing the Mock API
 
 ```
-curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
+curl "http://localhost:5001/api/v1/getWeather?city=Bengaluru"
 ```
 
 You will see the following result:
